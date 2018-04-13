@@ -1,3 +1,4 @@
+//Displays the home button
 class HomeButton{
   HomeButton(){
   }

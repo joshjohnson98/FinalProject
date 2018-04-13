@@ -1,3 +1,4 @@
+//Displays the game screen
 class GameScreen{
   GameScreen(){
   }

@@ -1,3 +1,4 @@
+//Displays the main menu homepage
 class MainMenu{
   //Option to start game
       //Easy Level

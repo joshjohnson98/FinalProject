@@ -1,4 +1,4 @@
-//Displays the difficulty selection scene
+//Displays the difficulty selection screen
 class DifficultyScreen{
   DifficultyScreen(){
   }
