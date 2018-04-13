@@ -12,6 +12,7 @@ class UserShip{
   private float rot;
   private boolean isAlive;
   private boolean exploding;
+  private int lives;
   
   UserShip(PApplet p){
     shipPic = loadImage("millenium_falcon.png");
@@ -19,6 +20,7 @@ class UserShip{
     boom = new SoundFile(p,"explosionSound1.mp3");
     rot = 0;
     isAlive = true;
+    lives = 3;
   }
 
   void displayShip(){
@@ -63,6 +65,7 @@ class UserShip{
   void checkIsAlive(){//Finish once progress is made on the rest of the code
     if(mousePressed){ //testing purposes
       isAlive = false;
+      lives--;
     }
   }
   
