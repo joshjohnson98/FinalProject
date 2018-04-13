@@ -1,6 +1,7 @@
 //Final Project:  Joshua Johnson & Nick Owens
 MainMenu mm;
 PImage mainMenu;
+UserShip falcon;
 DifficultyScreen ds;
 GameScreen gs;
 HomeButton hb;
@@ -14,6 +15,7 @@ void setup(){
   ds = new DifficultyScreen();
   gs = new GameScreen();
   hb = new HomeButton();
+  falcon = new UserShip(this);
   rectMode(CENTER);
   textAlign(CENTER);
 }
@@ -31,8 +33,10 @@ void draw(){
     ds.displayDS();
     hb.displayHB();
   }
-  
 }
+  
+
+
 
 
 void playMusic(){  //probably good to keep this here
