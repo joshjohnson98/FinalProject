@@ -31,14 +31,14 @@ class UserShip{
     }
     if (isAlive){
       imageMode(CENTER);
-      translate(width/2,height/2);
+      //translate(width/2,height/2);
       rotate(rot);
       image(shipPic, 0, 0);
       resetMatrix();
     }
     else{
       imageMode(CENTER);
-      translate(width/2,height/2);
+      //translate(width/2,height/2);
       rotate(rot);
       image(explosion, 0, 0);
       resetMatrix();

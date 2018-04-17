@@ -14,11 +14,13 @@ class DifficultyScreen{
     text("HARD", 450, 210);
     
   if (mouseX <= 250 && mouseX >= 50 && mouseY <= 250 && mouseY >= 150 && mousePressed) {
-    difficulty = 1;
+    difficulty = 1; //easy difficulty
+    currentScreen = 2; //send to game screen
   }
 
   if (mouseX <= 550 && mouseX >= 350 && mouseY <= 250 && mouseY >= 150 && mousePressed) {
-    difficulty = 2;
+    difficulty = 2; //hard difficulty
+    currentScreen = 2; //send to game screen
   }
   }
 }

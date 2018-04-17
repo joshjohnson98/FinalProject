@@ -3,7 +3,7 @@ MainMenu mm;
 PImage mainMenu;
 UserShip falcon;
 DifficultyScreen ds;
-GameScreen gs;
+Stars stars;
 HomeButton hb;
 int difficulty = 1;
 int currentScreen = 1;
@@ -13,7 +13,7 @@ void setup(){
   mm = new MainMenu();
   mainMenu = loadImage("mainmenu.jpg");
   ds = new DifficultyScreen();
-  gs = new GameScreen();
+  stars = new Stars();
   hb = new HomeButton();
   falcon = new UserShip(this);
   rectMode(CENTER);
@@ -21,15 +21,27 @@ void setup(){
 }
 
 void draw(){
-  if (currentScreen == 1){
+  if (currentScreen == 1){ //main menu
     mm.displayMM();
   }
-  else if (currentScreen == 2){
-    gs.displayGS();
-    hb.displayHB();
+  else if (currentScreen == 2){ //game screen
     
+    translate(width/2, height/2); //only do this here
+    //^new coordinate system. center of game window is 0,0
+    //all new code goes below
+    
+    stars.displayStars();
+    
+    falcon.checkIsAlive();
+    falcon.updateDirection();
+    falcon.displayShip();
+    
+    
+    
+    translate(0,0);
+    hb.displayHB();
   }
-  else if (currentScreen == 3){
+  else if (currentScreen == 3){ //difficulty screen
     ds.displayDS();
     hb.displayHB();
   }
