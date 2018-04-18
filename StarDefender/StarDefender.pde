@@ -3,12 +3,16 @@ int difficulty;
 int currentScreen;
 public int shipDirection;
 public int userSpeed;
+boolean newGame;
 
 MainMenu mm;
 UserShip falcon;
 DifficultyScreen ds;
 Stars stars;
 HomeButton hb;
+
+SoundFile mainTheme;
+SoundFile battleMusic;
 
 
 void setup(){
@@ -19,20 +23,32 @@ void setup(){
   difficulty = 1;
   currentScreen = 1;
   shipDirection = 0;
-  userSpeed = 2;
+  userSpeed = 3;
+  newGame = true;
   
   mm = new MainMenu();
   ds = new DifficultyScreen();
   stars = new Stars();
   hb = new HomeButton();
   falcon = new UserShip(this);
+  
+  mainTheme = new SoundFile(this, "mainTheme.mp3");
+  battleMusic = new SoundFile(this, "battleMusic.mp3");
+  
+  mainTheme.loop();
 }
 
 void draw(){
   if (currentScreen == 1){ //main menu
+    newGame = true;
     mm.displayMM();
   }
   else if (currentScreen == 2){ //game screen
+    mainTheme.stop();
+    if (newGame){
+      battleMusic.loop();
+    }
+    newGame = false;
     
     translate(width/2, height/2); //only do this here
     //^new coordinate system. center of game window is 0,0
@@ -40,6 +56,7 @@ void draw(){
     stars.updateLocation();
     stars.displayStars();
     
+
 
     
     
