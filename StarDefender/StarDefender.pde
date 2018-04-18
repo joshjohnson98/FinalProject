@@ -1,23 +1,31 @@
 //Final Project:  Joshua Johnson & Nick Owens
+int difficulty;
+int currentScreen;
+public int shipDirection;
+public int userSpeed;
+
 MainMenu mm;
-PImage mainMenu;
 UserShip falcon;
 DifficultyScreen ds;
 Stars stars;
 HomeButton hb;
-int difficulty = 1;
-int currentScreen = 1;
+
 
 void setup(){
   size(600,600); //600 x 600 is a good size with me. Let's stick with this
+  rectMode(CENTER);
+  textAlign(CENTER);
+  
+  difficulty = 1;
+  currentScreen = 1;
+  shipDirection = 0;
+  userSpeed = 2;
+  
   mm = new MainMenu();
-  mainMenu = loadImage("mainmenu.jpg");
   ds = new DifficultyScreen();
   stars = new Stars();
   hb = new HomeButton();
   falcon = new UserShip(this);
-  rectMode(CENTER);
-  textAlign(CENTER);
 }
 
 void draw(){
@@ -29,14 +37,19 @@ void draw(){
     translate(width/2, height/2); //only do this here
     //^new coordinate system. center of game window is 0,0
     //all new code goes below
-    
+    stars.updateLocation();
     stars.displayStars();
     
+
+    
+    
+    
+    
+    
+    //userShip resets matrix. leave at bottom of code here
     falcon.checkIsAlive();
     falcon.updateDirection();
     falcon.displayShip();
-    
-    
     
     translate(0,0);
     hb.displayHB();

@@ -8,10 +8,12 @@ class MainMenu{
           //More asteroids
   //Option to Exit
   //User Input: the user clicks on buttons using their mouse
+  PImage mainMenu;
  
   
   
   MainMenu(){
+    mainMenu = loadImage("mainmenu.jpg");
   }
   
   void displayMM() {

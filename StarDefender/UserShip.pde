@@ -14,6 +14,7 @@ class UserShip{
   private boolean exploding;
   private int lives;
   
+  
   UserShip(PApplet p){
     shipPic = loadImage("millenium_falcon.png");
     explosion = loadImage("explosion.png");
@@ -50,15 +51,19 @@ class UserShip{
   void updateDirection(){
     if(key == 'a' || keyCode == LEFT){
       rot = 0;
+      shipDirection = 0;
     }
     else if (key == 's' || keyCode == DOWN){
       rot = 3*PI/2;
+      shipDirection = 1;
     }
     else if (key == 'd' || keyCode == RIGHT){
       rot = PI;
+      shipDirection = 2;
     }
     else if (key == 'w' || keyCode == UP){
       rot = PI/2;
+      shipDirection = 3;
     }      
   }
   

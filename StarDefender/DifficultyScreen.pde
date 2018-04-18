@@ -1,6 +1,8 @@
 //Displays the difficulty selection screen
 class DifficultyScreen{
+  PImage mainMenu;
   DifficultyScreen(){
+    mainMenu = loadImage("mainmenu.jpg");
   }
   void displayDS(){
     background(mainMenu);
