@@ -76,10 +76,3 @@ void draw(){
     hb.displayHB();
   }
 }
-  
-
-
-
-
-void playMusic(){  //probably good to keep this here
-}
