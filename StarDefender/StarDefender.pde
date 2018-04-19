@@ -27,7 +27,7 @@ void setup(){
   currentScreen = 1;
   shipDirection = 0;
   userSpeed = 3;
-  maxBullets = 10;
+  maxBullets = 100;
   newGame = true;
   
   mm = new MainMenu();
@@ -109,7 +109,7 @@ void draw(){
       pew.stop();
       pew.amp(1.3);
       pew.play();
-      for (int i=0; i<10; i++) {
+      for (int i=0; i<maxBullets; i++) {
         if (!falcon.bullets[i].visible) {
           // start new bullet 
           falcon.bullets[i].visible = true;
