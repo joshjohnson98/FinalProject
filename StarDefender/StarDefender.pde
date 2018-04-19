@@ -7,6 +7,7 @@ boolean newGame;
 
 MainMenu mm;
 UserShip falcon;
+DeathStar deathStar;
 DifficultyScreen ds;
 Stars stars;
 HomeButton hb;
@@ -31,6 +32,7 @@ void setup(){
   stars = new Stars();
   hb = new HomeButton();
   falcon = new UserShip(this);
+  deathStar = new DeathStar();
   
   mainTheme = new SoundFile(this, "mainTheme.mp3");
   battleMusic = new SoundFile(this, "battleMusic.mp3");
@@ -56,12 +58,20 @@ void draw(){
     stars.updateLocation();
     stars.displayStars();
     
+    deathStar.updateLocation();
+    deathStar.displayDeathStar();
 
-
+    //loop to display userShip bullets
+    for (int i = 0; i<10; i++){
+      falcon.bullets[i].updateLocation();
+      falcon.bullets[i].displayBullet();
+    }
     
-    
-    
-    
+  
+  
+  
+  
+  
     
     //userShip resets matrix. leave at bottom of code here
     falcon.checkIsAlive();
@@ -76,3 +86,38 @@ void draw(){
     hb.displayHB();
   }
 }
+
+  void keyPressed() {
+    if (key == ' ') {
+      // search empty slot
+      print("pew!");
+      for (int i=0; i<10; i++) {
+        if (!falcon.bullets[i].visible) {
+          // start new bullet 
+          falcon.bullets[i].visible = true;
+          falcon.bullets[i].x = 0;
+          falcon.bullets[i].y = 0;
+          
+          
+          //speedX and speedY determined by userShip direction at time of creation
+          if (shipDirection == 0){ //ship facing left
+            falcon.bullets[i].speedX = -14;
+            falcon.bullets[i].speedY = 0;
+          }
+          else if (shipDirection == 1){ //ship facing down
+            falcon.bullets[i].speedX = 0;
+            falcon.bullets[i].speedY = 14;
+          }
+          else if (shipDirection == 2){ //ship facing right
+            falcon.bullets[i].speedX = 14;
+            falcon.bullets[i].speedY = 0;
+          }
+          else if (shipDirection == 3){ //ship facing up
+            falcon.bullets[i].speedX = 0;
+            falcon.bullets[i].speedY = -14;
+          }
+          break;
+        }
+      }
+    }
+  }

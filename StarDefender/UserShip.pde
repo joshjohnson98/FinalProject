@@ -13,6 +13,7 @@ class UserShip{
   private boolean isAlive;
   private boolean exploding;
   private int lives;
+  private Bullet[] bullets;
   
   
   UserShip(PApplet p){
@@ -22,6 +23,14 @@ class UserShip{
     rot = 0;
     isAlive = true;
     lives = 3;
+    bullets = new Bullet[10];
+    //fill with initialized bullets
+    for (int i = 0; i<10; i++){
+      bullets[i] = new Bullet();
+      bullets[i].speedX = 0;
+      bullets[i].speedY = 0;
+    }
+    
   }
 
   void displayShip(){
@@ -73,5 +82,4 @@ class UserShip{
       lives--;
     }
   }
-  
 }
