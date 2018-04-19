@@ -64,6 +64,7 @@ void draw(){
     stars.displayStars();
     
     deathStar.updateLocation();
+    deathStar.checkIfHit();
     deathStar.displayDeathStar();
 
     //reset userShip bullet supply if depleted

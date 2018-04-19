@@ -2,18 +2,23 @@ class DeathStar{
   //Death Star will explode if hit by laser enough times (TBD, but roughly 20 hits to kill)
   //Health bar will appear over the Death Star indicating the damage it has taken
   PImage deathStar;
+  PImage explosion;
   private int x,y;
   private int maxHealth;
   private int health;
   private int healthBarWidth;
+  private float bulletDist;
+  private boolean isAlive;
   
     DeathStar(){
     deathStar = loadImage("deathStar.png");
+    explosion = loadImage("explosion.png");
     x = -650;
     y = -800;
     maxHealth = 15;
     health = maxHealth;
     healthBarWidth = 150;
+    isAlive = true;
   }
   
   void updateLocation(){
@@ -33,10 +38,26 @@ class DeathStar{
   
   void displayDeathStar(){
      imageMode(CENTER);
+     if (isAlive){
      image(deathStar,x,y);
      
      //health bar
      drawHealthBar();   
+     }
+     else{
+       image(explosion,x,y);
+     }
+  }
+  
+  void checkIfHit(){
+    //current radius of death star image: 85 pixels
+    /*
+    for (int i = 0; i<maxBullets; i++){
+      bulletDist = sqrt((falcon.bullets[i].x-x)^2+(falcon.bullets[i].y-y)^2);
+      if (bulletDist<(85+falcon.bullets[0].size)){
+        decreaseHealth();
+      }
+    }*/
   }
   
   
@@ -66,6 +87,9 @@ class DeathStar{
       health -= 1;
       if (health <= 0){
         //game over
+        //death star explodes
+        isAlive = false;
+        print("Death Star Destroyed!!!");
       }
    }
   
