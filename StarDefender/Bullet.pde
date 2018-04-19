@@ -32,10 +32,15 @@ class Bullet{
   
   void displayBullet(){
      if (visible){
-       fill(255);
-       ellipse(x, y, size + 1, size + 1);
        fill(60, 230, 80);
-       ellipse(x, y, size, size);
+       ellipse(x, y, size + 2, size + 2);
+       
+       //figure out how to blur like kailedescope project
+       
+       //filter(BLUR,3);
+       //white in the center of bullet
+       fill(255);
+       ellipse(x, y, size - 2, size -2 );
      }
   }
   
