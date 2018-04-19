@@ -3,6 +3,7 @@ int difficulty;
 int currentScreen;
 public int shipDirection;
 public int userSpeed;
+public int maxBullets;
 boolean newGame;
 
 MainMenu mm;
@@ -14,6 +15,7 @@ HomeButton hb;
 
 SoundFile mainTheme;
 SoundFile battleMusic;
+SoundFile pew;
 
 
 void setup(){
@@ -25,6 +27,7 @@ void setup(){
   currentScreen = 1;
   shipDirection = 0;
   userSpeed = 3;
+  maxBullets = 10;
   newGame = true;
   
   mm = new MainMenu();
@@ -36,6 +39,7 @@ void setup(){
   
   mainTheme = new SoundFile(this, "mainTheme.mp3");
   battleMusic = new SoundFile(this, "battleMusic.mp3");
+  pew = new SoundFile(this, "pew.mp3");
   
   mainTheme.loop();
 }
@@ -48,6 +52,7 @@ void draw(){
   else if (currentScreen == 2){ //game screen
     mainTheme.stop();
     if (newGame){
+      battleMusic.amp(0.6);
       battleMusic.loop();
     }
     newGame = false;
@@ -61,12 +66,22 @@ void draw(){
     deathStar.updateLocation();
     deathStar.displayDeathStar();
 
+    //reset userShip bullet supply if depleted
+    if (falcon.bullets[maxBullets-1].visible == true){
+      for (int i = 0; i<maxBullets; i++){
+        falcon.bullets[i] = new Bullet();
+        falcon.bullets[i].speedX = 0;
+        falcon.bullets[i].speedY = 0;
+      }
+    }
+
     //loop to display userShip bullets
-    for (int i = 0; i<10; i++){
+    for (int i = 0; i<maxBullets; i++){
       falcon.bullets[i].updateLocation();
       falcon.bullets[i].displayBullet();
     }
     
+  
   
   
   
@@ -91,6 +106,9 @@ void draw(){
     if (key == ' ') {
       // search empty slot
       print("pew!");
+      pew.stop();
+      pew.amp(1.3);
+      pew.play();
       for (int i=0; i<10; i++) {
         if (!falcon.bullets[i].visible) {
           // start new bullet 

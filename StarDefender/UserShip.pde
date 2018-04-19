@@ -23,9 +23,9 @@ class UserShip{
     rot = 0;
     isAlive = true;
     lives = 3;
-    bullets = new Bullet[10];
+    bullets = new Bullet[maxBullets];
     //fill with initialized bullets
-    for (int i = 0; i<10; i++){
+    for (int i = 0; i<maxBullets; i++){
       bullets[i] = new Bullet();
       bullets[i].speedX = 0;
       bullets[i].speedY = 0;
