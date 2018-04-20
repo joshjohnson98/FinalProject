@@ -3,16 +3,22 @@ class DeathStar{
   //Health bar will appear over the Death Star indicating the damage it has taken
   PImage deathStar;
   PImage explosion;
+  
+  SoundFile boom;
+  
   private int x,y;
   private int maxHealth;
   private int health;
   private int healthBarWidth;
-  private float bulletDist;
+  private float bulletDist, shipDist;
   private boolean isAlive;
   
-    DeathStar(){
+    DeathStar(PApplet p){
     deathStar = loadImage("deathStar.png");
     explosion = loadImage("explosion.png");
+    
+    boom = new SoundFile(p,"explosionSound1.mp3");
+    
     x = -650;
     y = -800;
     maxHealth = 15;
@@ -51,13 +57,18 @@ class DeathStar{
   
   void checkIfHit(){
     //current radius of death star image: 85 pixels
-    /*
     for (int i = 0; i<maxBullets; i++){
-      bulletDist = sqrt((falcon.bullets[i].x-x)^2+(falcon.bullets[i].y-y)^2);
-      if (bulletDist<(85+falcon.bullets[0].size)){
-        decreaseHealth();
+      if (falcon.bullets[i].visible){
+        bulletDist = sqrt(sq(falcon.bullets[i].x-x)+sq(falcon.bullets[i].y-y));
+        shipDist = sqrt(sq(x)+sq(y));
+        
+        //if bullet hits death star and userShip is relatively close to death star (no extra long-range shots allowed)
+        if ((bulletDist<(85+falcon.bullets[0].size/2) && (shipDist<500))){
+          decreaseHealth();
+          falcon.bullets[i].visible = false;
+        }
       }
-    }*/
+    }
   }
   
   
@@ -79,7 +90,7 @@ class DeathStar{
       } else {
         fill(231, 76, 60);
       }
-      rect(x-(healthBarWidth/2), y - 110, healthBarWidth*(health/maxHealth), 8);
+      rect(x-(healthBarWidth/2), y - 110, healthBarWidth*((float) health/ (float) maxHealth), 8);
       rectMode(CENTER);
     }
     
@@ -87,9 +98,10 @@ class DeathStar{
       health -= 1;
       if (health <= 0){
         //game over
+        
         //death star explodes
         isAlive = false;
-        print("Death Star Destroyed!!!");
+        boom.play();
       }
    }
   

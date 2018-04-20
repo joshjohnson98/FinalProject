@@ -35,7 +35,7 @@ void setup(){
   stars = new Stars();
   hb = new HomeButton();
   falcon = new UserShip(this);
-  deathStar = new DeathStar();
+  deathStar = new DeathStar(this);
   
   mainTheme = new SoundFile(this, "mainTheme.mp3");
   battleMusic = new SoundFile(this, "battleMusic.mp3");
@@ -105,11 +105,11 @@ void draw(){
 
   void keyPressed() {
     if (key == ' ') {
-      // search empty slot
-      print("pew!");
       pew.stop();
       pew.amp(1.3);
       pew.play();
+      
+      // search empty slot
       for (int i=0; i<maxBullets; i++) {
         if (!falcon.bullets[i].visible) {
           // start new bullet 
