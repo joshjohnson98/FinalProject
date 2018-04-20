@@ -5,6 +5,7 @@ class DeathStar{
   PImage explosion;
   
   SoundFile boom;
+  SoundFile hit;
   
   private int x,y;
   private int maxHealth;
@@ -15,9 +16,10 @@ class DeathStar{
   
     DeathStar(PApplet p){
     deathStar = loadImage("deathStar.png");
-    explosion = loadImage("explosion.png");
+    explosion = loadImage("deathStarExplosion.png");
     
-    boom = new SoundFile(p,"explosionSound1.mp3");
+    boom = new SoundFile(p,"deathStarBoom.mp3");
+    hit = new SoundFile(p,"deathStarHit.mp3");
     
     x = -650;
     y = -800;
@@ -65,6 +67,8 @@ class DeathStar{
         //if bullet hits death star and userShip is relatively close to death star (no extra long-range shots allowed)
         if ((bulletDist<(85+falcon.bullets[0].size/2) && (shipDist<500))){
           decreaseHealth();
+          hit.amp(5);
+          hit.play();
           falcon.bullets[i].visible = false;
         }
       }
@@ -101,6 +105,7 @@ class DeathStar{
         
         //death star explodes
         isAlive = false;
+        boom.amp(2);
         boom.play();
       }
    }
