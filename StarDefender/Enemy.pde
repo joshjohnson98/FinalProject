@@ -83,4 +83,9 @@ class Enemy {
       boom.play();
     }
   }
+  
+  void resetPosition(){
+    x = int(random(deathStar.x - 125, deathStar.x + 125));
+    y = int(random(deathStar.y - 125, deathStar.y + 125));
+  }
 }

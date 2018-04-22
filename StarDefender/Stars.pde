@@ -46,4 +46,8 @@ class Stars {
     imageMode(CENTER);
     image(stars, x, y);
   }
+  
+  void resetPosition(){
+    x = y = 0;
+  }
 }

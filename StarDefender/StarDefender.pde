@@ -7,6 +7,7 @@ public int maxBullets;
 boolean newGame;
 public int numAsteroids;
 public int maxEnemies;
+public int enemySpawnTime;
 public float deadTime, respondTime;
 
 public ArrayList <Asteroid> asteroids;
@@ -18,6 +19,7 @@ DeathStar deathStar;
 DifficultyScreen ds;
 Stars stars;
 HomeButton hb;
+LivesDisplay ld;
 
 SoundFile mainTheme;
 SoundFile battleMusic;
@@ -34,8 +36,9 @@ void setup() {
   shipDirection = 0;
   userSpeed = 3;
   maxBullets = 100;
-  numAsteroids = 25;
+  numAsteroids = 25;        
   maxEnemies = 2;
+  enemySpawnTime = 4000;
   newGame = true;
 
   mm = new MainMenu();
@@ -44,6 +47,7 @@ void setup() {
   hb = new HomeButton();
   falcon = new UserShip(this);
   deathStar = new DeathStar(this);
+  ld = new LivesDisplay();
   asteroids = new ArrayList <Asteroid>();
   enemies = new ArrayList <Enemy>();
 
@@ -60,14 +64,15 @@ void draw() {
     battleMusic.stop();
     newGame = true;
     mm.displayMM();
-  } else if (currentScreen == 2) { //game screen
+  } 
+  else if (currentScreen == 2) { //game screen
     mainTheme.stop();
 
     if (newGame) {
       //Creates all of the asteroid objects when a new game starts
       asteroids = new ArrayList <Asteroid>();
       for (int i=0; i<numAsteroids; i++) {
-        asteroids.add(new Asteroid());
+        asteroids.add(new Asteroid(this));
       }
 
       //Creates all of the initial enemy objects when a new game starts
@@ -91,6 +96,7 @@ void draw() {
     //Updates and displays all of the existing asteroids
     for (int j=0; j<asteroids.size(); j++) {
       asteroids.get(j).updateLocation();
+      asteroids.get(j).checkIfHit();
       asteroids.get(j).displayAsteroid();
 
       if (asteroids.get(j).isAlive == false) {
@@ -100,7 +106,7 @@ void draw() {
 
     //Respond delay for new enemies upon destroying an enemy, currently 4 seconds
     respondTime = millis() - deadTime;
-    if (respondTime >= 4000)
+    if (respondTime >= enemySpawnTime)
       //replaces all destroyed enemies up to the max number of enemies
       while (enemies.size() < maxEnemies) {
         enemies.add(new Enemy(this));
@@ -136,6 +142,11 @@ void draw() {
       falcon.bullets[i].updateLocation();
       falcon.bullets[i].displayBullet();
     }
+
+    //Display user lives icons
+    ld.displayLives();
+    
+
 
 
 

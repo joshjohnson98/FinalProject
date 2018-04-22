@@ -23,7 +23,7 @@ class DeathStar {
 
     x = -650;
     y = -800;
-    maxHealth = 15;
+    maxHealth = 20;
     health = maxHealth;
     healthBarWidth = 150;
     isAlive = true;
@@ -104,5 +104,10 @@ class DeathStar {
       boom.amp(2);
       boom.play();
     }
+  }
+  
+  void resetPosition(){
+    x = -650;
+    y = -800;
   }
 }

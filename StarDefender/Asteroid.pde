@@ -3,14 +3,22 @@ class Asteroid {
   //TBD whether or not they can be destroyed by lasers
 
   PImage asteroid;
+  PImage explosion;
+  
+  SoundFile boom;
+  
   private int x, y;
   private int tempX, tempY;
+  private float bulletDist, shipDist;
   private boolean isAlive;
 
   //Creates an Asteroid object randomly spawned somewhere on the map but outside a given distance from 
   //both the deathStar and the userShip
-  Asteroid() {
+  Asteroid(PApplet p) {
     asteroid = loadImage("asteroid.png");
+
+    explosion = loadImage("explosion.png");
+    boom = new SoundFile(p, "explosionSound1.mp3");
 
     tempX = int(random(-1200, 1200));
     tempY = int(random(-1400, 1400));
@@ -43,8 +51,33 @@ class Asteroid {
   void displayAsteroid() {
     imageMode(CENTER);
 
-    if (isAlive == true) {
+    if (isAlive) {
       image(asteroid, x, y);
     }
+    else{
+      image(explosion, x, y);
+      boom.play();
+    }
+  }
+  
+  void checkIfHit() {
+    //Checks if asteroid has been hit by userShip laser
+    for (int i = 0; i<maxBullets; i++) {
+      if (falcon.bullets[i].visible) {
+        bulletDist = sqrt(sq(falcon.bullets[i].x-x)+sq(falcon.bullets[i].y-y));
+        shipDist = sqrt(sq(x)+sq(y));
+
+        //if bullet hits asteroid and userShip is relatively close to asteroid(no extra long-range shots allowed)
+        if ((bulletDist<(37.5+falcon.bullets[0].size/2) && (shipDist<500))) {
+          isAlive = false;
+          falcon.bullets[i].visible = false;
+        }
+      }
+    }
+  }
+  
+  void resetPosition(){
+    x = tempX;
+    y = tempY;
   }
 }

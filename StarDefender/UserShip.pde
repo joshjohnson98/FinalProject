@@ -12,7 +12,7 @@ class UserShip {
   private float rot;
   private boolean isAlive;
   private boolean exploding;
-  private int lives;
+  public int lives;
   private Bullet[] bullets;
 
 
@@ -89,5 +89,23 @@ class UserShip {
         lives--;
       }
     }
+    
+    //collision detection performed for Death Star and handled if collision occurs
+     if (sqrt(sq(deathStar.x) + sq(deathStar.y)) <= 120) {
+       isAlive = false;
+       lives--;
+       
+       //move userShip away from DeathStar
+       deathStar.resetPosition();
+       stars.resetPosition();
+       
+       for (int k=0; k<enemies.size(); k++) {
+         enemies.get(k).resetPosition();
+       }
+       for (int j=0; j<asteroids.size(); j++) {
+         asteroids.get(j).resetPosition();
+       }
+       
+     }
   }
 }
