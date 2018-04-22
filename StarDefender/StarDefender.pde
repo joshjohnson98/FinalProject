@@ -9,11 +9,14 @@ public int numAsteroids;
 public int maxEnemies;
 public int enemySpawnTime;
 public float deadTime, respondTime;
+public boolean gameOver;
 
 public ArrayList <Asteroid> asteroids;
 public ArrayList <Enemy> enemies;
 
 MainMenu mm;
+GameOverScreen gos;
+Leaderboard lb;
 UserShip falcon;
 DeathStar deathStar;
 DifficultyScreen ds;
@@ -40,8 +43,11 @@ void setup() {
   maxEnemies = 2;
   enemySpawnTime = 4000;
   newGame = true;
+  gameOver = false;
 
   mm = new MainMenu();
+  gos = new GameOverScreen();
+  lb = new Leaderboard();
   ds = new DifficultyScreen();
   stars = new Stars();
   hb = new HomeButton();
@@ -60,15 +66,24 @@ void setup() {
 }
 
 void draw() {
+
+  if (gameOver == true) {
+    currentScreen = 4;
+    gameOver = false;
+  }
+
   if (currentScreen == 1) { //main menu
     battleMusic.stop();
     newGame = true;
     mm.displayMM();
-  } 
-  else if (currentScreen == 2) { //game screen
+  } else if (currentScreen == 2) { //game screen
     mainTheme.stop();
 
     if (newGame) {
+
+      gameOver = false;
+      falcon.lives = 3;
+      deathStar.health = deathStar.maxHealth;
       //Creates all of the asteroid objects when a new game starts
       asteroids = new ArrayList <Asteroid>();
       for (int i=0; i<numAsteroids; i++) {
@@ -145,7 +160,7 @@ void draw() {
 
     //Display user lives icons
     ld.displayLives();
-    
+
 
 
 
@@ -155,16 +170,26 @@ void draw() {
     falcon.updateDirection();
     falcon.displayShip();
 
+    if (falcon.lives == 0 || deathStar.isAlive == false) {
+      gameOver = true;
+    }
 
     translate(0, 0);
     hb.displayHB();
   } else if (currentScreen == 3) { //difficulty screen
     ds.displayDS();
     hb.displayHB();
+  } else if (currentScreen == 4) {
+    gos.displayGOS();
+  }
+  else if (currentScreen == 5){
+    lb.displayLB();
   }
 }
 
 void keyPressed() {
+  
+  if (currentScreen == 2){
   if (key == ' ') {
     pew.stop();
     pew.amp(1.3);
@@ -195,6 +220,39 @@ void keyPressed() {
         }
         break;
       }
+    }
+  }
+  }
+}
+
+//Handles the user input for their name after a successful mission
+void keyReleased() {
+
+  if (currentScreen == 4) {
+    if (key == BACKSPACE || key == DELETE) {
+      if (gos.currentName.length() >= 1) {
+        gos.currentName = gos.currentName.substring(0, gos.currentName.length()-1);
+      }
+    } else if (key == ENTER || key == RETURN) {
+      
+      lb.newNames = new String [lb.names.length + 1];
+      lb.newLives = new String [lb.lives.length + 1];
+      
+      for (int i=0; i<lb.names.length; i++){
+        lb.newNames[i] = lb.names[i];
+        lb.newLives[i] = lb.lives[i];
+      }
+      
+      lb.newNames[lb.newNames.length - 1] = gos.currentName;
+      lb.newLives[lb.newLives.length - 1] = str(falcon.lives);
+      saveStrings(dataPath("leaderboard.txt"), lb.newNames);
+      saveStrings(dataPath("leaderboard2.txt"), lb.newLives);
+      
+      gos.currentName = "";
+      currentScreen = 5;
+    } else {
+      gos.currentName += key;
+      gos.currentName = gos.currentName.toUpperCase();
     }
   }
 }
