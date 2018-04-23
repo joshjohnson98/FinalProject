@@ -1,5 +1,6 @@
 class Leaderboard{
   PImage stars, icon;
+  
   String [] names;
   String [] newNames;
   String [] lives;
@@ -13,9 +14,11 @@ class Leaderboard{
     icon = loadImage("falconIcon.png");
     names = loadStrings("leaderboard.txt");
     lives = loadStrings("leaderboard2.txt");
+    
     yPos = 200;
     startIndex = 0;
     stopIndex = 5;
+    
   }
   
   void displayLB(){

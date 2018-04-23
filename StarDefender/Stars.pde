@@ -1,11 +1,15 @@
 //Displays the game screen
 class Stars {
   PImage stars;
-  private int x, y;
+  private int initX, initY, x, y;
 
   Stars() {
     stars = loadImage("tallStars.jpg");
-    x = y = 0;
+    
+    initX = 0;
+    initY = 0;
+    x = initX;
+    y = initY;
   }
 
   void updateLocation() {
@@ -52,6 +56,7 @@ class Stars {
   }
   
   void resetPosition(){
-    x = y = 0;
+    x = initX;
+    y = initY;
   }
 }

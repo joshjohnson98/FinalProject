@@ -28,6 +28,7 @@ LivesDisplay ld;
 SoundFile mainTheme;
 SoundFile battleMusic;
 SoundFile pew;
+SoundFile throneRoom;
 
 
 void setup() {
@@ -61,6 +62,7 @@ void setup() {
 
   mainTheme = new SoundFile(this, "mainTheme.mp3");
   battleMusic = new SoundFile(this, "battleMusic.mp3");
+  throneRoom = new SoundFile(this, "throneRoom.mp3");
   pew = new SoundFile(this, "pew.mp3");
 
   mainTheme.loop();
@@ -75,12 +77,15 @@ void draw() {
 
   if (currentScreen == 1) { //main menu
     battleMusic.stop();
+    throneRoom.stop();
     newGame = true;
     mm.displayMM();
   } else if (currentScreen == 2) { //game screen
     mainTheme.stop();
 
     if (newGame) {
+      battleMusic.amp(0.6);
+      battleMusic.loop();
       
       deathStar.resetPosition();
       stars.resetPosition();
@@ -100,9 +105,6 @@ void draw() {
       for (int j=0; j<maxEnemies; j++) {
         enemies.add(new Enemy(this));
       }
-
-      battleMusic.amp(0.6);
-      battleMusic.loop();
     }
 
     newGame = false;
@@ -184,10 +186,10 @@ void draw() {
   } else if (currentScreen == 3) { //difficulty screen
     ds.displayDS();
     hb.displayHB();
-  } else if (currentScreen == 4) {
+  } else if (currentScreen == 4) { //game over screen
     gos.displayGOS();
     hb.displayHB();
-  } else if (currentScreen == 5) {
+  } else if (currentScreen == 5) { //leaderboard
     lb.displayLB();
     hb.displayHB();
 
@@ -244,7 +246,10 @@ void keyReleased() {
         gos.currentName = gos.currentName.substring(0, gos.currentName.length()-1);
       }
     } else if (key == ENTER || key == RETURN) {
-
+      battleMusic.stop();
+      throneRoom.amp(0.7);
+      throneRoom.play();
+      
       lb.newNames = new String [lb.names.length + 1];
       lb.newLives = new String [lb.lives.length + 1];
 

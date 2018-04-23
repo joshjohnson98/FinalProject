@@ -7,7 +7,7 @@ class DeathStar {
   SoundFile boom;
   SoundFile hit;
 
-  private int x, y;
+  private int initX,initY, x, y;
   private int maxHealth;
   private int health;
   private int healthBarWidth;
@@ -21,8 +21,11 @@ class DeathStar {
     boom = new SoundFile(p, "deathStarBoom.mp3");
     hit = new SoundFile(p, "deathStarHit.mp3");
 
-    x = -650;
-    y = -800;
+    initX = (int) (random(-0.25,0.25)*3000);  //random x location in the center 50% of the map
+    initY = -810;
+    x = initX;
+    y = initY;
+    
     maxHealth = 20;
     health = maxHealth;
     healthBarWidth = 150;
@@ -107,7 +110,7 @@ class DeathStar {
   }
   
   void resetPosition(){
-    x = -650;
-    y = -800;
+    x = initX;
+    y = initY;
   }
 }
