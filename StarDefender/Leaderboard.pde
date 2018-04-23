@@ -5,7 +5,8 @@ class Leaderboard{
   String [] lives;
   String [] newLives;
   int yPos;
-  int startIndex, stopIndex;
+  int startIndex, stopIndex; 
+  long lbTime;
   
   Leaderboard(){
     stars = loadImage("tallStars.jpg");
@@ -40,6 +41,7 @@ class Leaderboard{
     }
     
     if (stopIndex > names.length){
+      finalStopIndex = stopIndex;
       stopIndex = names.length;
     }
     
@@ -67,8 +69,17 @@ class Leaderboard{
       
     }
     yPos = 200;
-    startIndex += 5;
-    stopIndex += 5;
+    
+    lbTime = millis() - startTime;
+    if (lbTime > names.length*1000){
+      startTime = millis();
+      startIndex = 0;
+      stopIndex = 5;
+    }
+    else if (lbTime > stopIndex*1000){
+      startIndex += 5;
+      stopIndex += 5;
+    }
     
   }
   

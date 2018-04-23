@@ -10,6 +10,7 @@ public int maxEnemies;
 public int enemySpawnTime;
 public float deadTime, respondTime;
 public boolean gameOver;
+public long startTime;
 
 public ArrayList <Asteroid> asteroids;
 public ArrayList <Enemy> enemies;
@@ -80,9 +81,13 @@ void draw() {
     mainTheme.stop();
 
     if (newGame) {
-
+      
+      deathStar.resetPosition();
+      stars.resetPosition();
+      
       gameOver = false;
       falcon.lives = 3;
+      deathStar.isAlive = true;
       deathStar.health = deathStar.maxHealth;
       //Creates all of the asteroid objects when a new game starts
       asteroids = new ArrayList <Asteroid>();
@@ -186,9 +191,9 @@ void draw() {
     lb.displayLB();
     hb.displayHB();
 
-    long idleTime = millis()+5000;
-    while (idleTime>millis()) {
-    }
+    //long idleTime = millis()+5000;
+    //while (idleTime>millis()) {
+    //}
   }
 }
 
@@ -254,6 +259,7 @@ void keyReleased() {
       saveStrings(dataPath("leaderboard2.txt"), lb.newLives);
 
       gos.currentName = "";
+      startTime = millis();
       currentScreen = 5;
     } else {
       gos.currentName += key;
