@@ -4,6 +4,7 @@ class HomeButton {
   }
 
   void displayHB() {
+    textAlign(CENTER);
     fill(255, 245, 25);
     rect(550, 50, 50, 50);
     fill(0);

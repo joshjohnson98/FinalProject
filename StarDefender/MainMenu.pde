@@ -17,6 +17,7 @@ class MainMenu {
   }
 
   void displayMM() {
+    textAlign(CENTER);
     background(mainMenu);
     fill(255, 245, 25);
     rect(100, 500, 150, 100);

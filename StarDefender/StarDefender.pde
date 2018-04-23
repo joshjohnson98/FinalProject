@@ -181,47 +181,52 @@ void draw() {
     hb.displayHB();
   } else if (currentScreen == 4) {
     gos.displayGOS();
-  }
-  else if (currentScreen == 5){
+    hb.displayHB();
+  } else if (currentScreen == 5) {
     lb.displayLB();
+    hb.displayHB();
+
+    long idleTime = millis()+5000;
+    while (idleTime>millis()) {
+    }
   }
 }
 
 void keyPressed() {
-  
-  if (currentScreen == 2){
-  if (key == ' ') {
-    pew.stop();
-    pew.amp(1.3);
-    pew.play();
 
-    // search empty slot
-    for (int i=0; i<maxBullets; i++) {
-      if (!falcon.bullets[i].visible) {
-        // start new bullet 
-        falcon.bullets[i].visible = true;
-        falcon.bullets[i].x = 0;
-        falcon.bullets[i].y = 0;
+  if (currentScreen == 2) {
+    if (key == ' ') {
+      pew.stop();
+      pew.amp(1.3);
+      pew.play();
+
+      // search empty slot
+      for (int i=0; i<maxBullets; i++) {
+        if (!falcon.bullets[i].visible) {
+          // start new bullet 
+          falcon.bullets[i].visible = true;
+          falcon.bullets[i].x = 0;
+          falcon.bullets[i].y = 0;
 
 
-        //speedX and speedY determined by userShip direction at time of creation
-        if (shipDirection == 0) { //ship facing left
-          falcon.bullets[i].speedX = -14;
-          falcon.bullets[i].speedY = 0;
-        } else if (shipDirection == 1) { //ship facing down
-          falcon.bullets[i].speedX = 0;
-          falcon.bullets[i].speedY = 14;
-        } else if (shipDirection == 2) { //ship facing right
-          falcon.bullets[i].speedX = 14;
-          falcon.bullets[i].speedY = 0;
-        } else if (shipDirection == 3) { //ship facing up
-          falcon.bullets[i].speedX = 0;
-          falcon.bullets[i].speedY = -14;
+          //speedX and speedY determined by userShip direction at time of creation
+          if (shipDirection == 0) { //ship facing left
+            falcon.bullets[i].speedX = -14;
+            falcon.bullets[i].speedY = 0;
+          } else if (shipDirection == 1) { //ship facing down
+            falcon.bullets[i].speedX = 0;
+            falcon.bullets[i].speedY = 14;
+          } else if (shipDirection == 2) { //ship facing right
+            falcon.bullets[i].speedX = 14;
+            falcon.bullets[i].speedY = 0;
+          } else if (shipDirection == 3) { //ship facing up
+            falcon.bullets[i].speedX = 0;
+            falcon.bullets[i].speedY = -14;
+          }
+          break;
         }
-        break;
       }
     }
-  }
   }
 }
 
@@ -234,20 +239,20 @@ void keyReleased() {
         gos.currentName = gos.currentName.substring(0, gos.currentName.length()-1);
       }
     } else if (key == ENTER || key == RETURN) {
-      
+
       lb.newNames = new String [lb.names.length + 1];
       lb.newLives = new String [lb.lives.length + 1];
-      
-      for (int i=0; i<lb.names.length; i++){
+
+      for (int i=0; i<lb.names.length; i++) {
         lb.newNames[i] = lb.names[i];
         lb.newLives[i] = lb.lives[i];
       }
-      
+
       lb.newNames[lb.newNames.length - 1] = gos.currentName;
       lb.newLives[lb.newLives.length - 1] = str(falcon.lives);
       saveStrings(dataPath("leaderboard.txt"), lb.newNames);
       saveStrings(dataPath("leaderboard2.txt"), lb.newLives);
-      
+
       gos.currentName = "";
       currentScreen = 5;
     } else {
