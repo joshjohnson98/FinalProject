@@ -34,6 +34,15 @@ class Leaderboard{
     
     yPos = 200;
     
+    if (startIndex >= names.length){
+      startIndex = 0;
+      stopIndex = 5;
+    }
+    
+    if (stopIndex > names.length){
+      stopIndex = names.length;
+    }
+    
     for (int k=startIndex; k<stopIndex; k++){
       textAlign(LEFT);
       textSize(40);
@@ -60,15 +69,6 @@ class Leaderboard{
     yPos = 200;
     startIndex += 5;
     stopIndex += 5;
-    
-    if (startIndex >= names.length){
-      startIndex = 0;
-      stopIndex = 5;
-    }
-    
-    if (stopIndex > names.length){
-      stopIndex = names.length;
-    }
     
   }
   
