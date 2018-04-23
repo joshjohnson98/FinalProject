@@ -41,7 +41,6 @@ class Leaderboard{
     }
     
     if (stopIndex > names.length){
-      finalStopIndex = stopIndex;
       stopIndex = names.length;
     }
     

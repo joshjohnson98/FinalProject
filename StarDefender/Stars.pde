@@ -14,18 +14,22 @@ class Stars {
     //and the opposite direction
     if (x<=-1200) { //hits right wall. send ship left
       shipDirection = 0;
+      falcon.rot = 0;
       print("right wall");
     }
     if (y>=1400) { //hits top wall. send ship down
       shipDirection = 1;
+      falcon.rot = 3*PI/2;
       print("top wall");
     }
     if (x>=1200) { //hits left wall. send ship right
       shipDirection = 2;
+      falcon.rot = PI;
       print("left wall");
     }
     if (y<=-1400) { //hits bottom wall. send ship up
       shipDirection = 3;
+      falcon.rot = PI/2;
       print("bottom wall");
     }   
 
