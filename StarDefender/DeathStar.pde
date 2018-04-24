@@ -86,9 +86,9 @@ class DeathStar {
     text("Health ", x-(healthBarWidth/2)-30, y - 102);
     rectMode(CORNER);
     rect(x-(healthBarWidth/2), y - 110, healthBarWidth, 8);
-    if (health > 10) {
+    if (health > round(2*maxHealth/3)) {
       fill(46, 204, 113);
-    } else if (health > 5) {
+    } else if (health > round(maxHealth/3)) {
       fill(230, 126, 34);
     } else {
       fill(231, 76, 60);
@@ -101,7 +101,6 @@ class DeathStar {
     health -= 1;
     if (health <= 0) {
       //game over
-
       //death star explodes
       isAlive = false;
       boom.amp(2);

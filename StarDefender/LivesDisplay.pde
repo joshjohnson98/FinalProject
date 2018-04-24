@@ -12,16 +12,16 @@ class LivesDisplay{
   void displayLives(){
     translate(0,0);
     
-    if (falcon.lives == 3){
+    if (falcon.lives == 3){ //3 user ship icons
       image(icon, 650, 550);
       image(icon, 700, 550);
       image(icon, 750, 550);
     }
-    else if (falcon.lives == 2){
+    else if (falcon.lives == 2){ //2 user ship icons
       image(icon, 700, 550);
       image(icon, 750, 550);
     }
-    else if (falcon.lives == 1){
+    else if (falcon.lives == 1){ //1 user ship icon
       image(icon, 750, 550);
     }
   }

@@ -7,13 +7,13 @@ class Stars {
     stars = loadImage("tallStars.jpg");
     
     initX = 0;
-    initY = 0-offY;
+    initY = 0-offY; //offY is used to set the user spawn point at the bottom of the map
     x = initX;
     y = initY;
   }
 
   void updateLocation() {
-    //image boundary solution. If ship hits wall, it stops.
+    //image boundary solution. If ship hits wall, it stops (unless the last key pressed was SPACE).
     //the direction switchs back and forth between last key pressed
     //and the opposite direction
     if (x<=-1200) { //hits right wall. send ship left

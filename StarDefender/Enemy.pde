@@ -126,11 +126,8 @@ class Enemy {
 
 
           //speedX and speedY determined by enemy ship direction at time of creation
-          //dx is x difference between enemy and user
-          //dy is y difference between enemy and user
           //create unit vector for x and y by dividing by distance
           //multiply each unit vector by speed of bullet for speedX and speedY
-          
           
           unitX = -x/(sq(x)+sq(y));
           unitY = -y/(sq(x)+sq(y));

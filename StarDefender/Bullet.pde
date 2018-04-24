@@ -31,17 +31,14 @@ class Bullet {
   void displayBullet() {
     if (visible) {
       if (!enemyBullet){
-        fill(60, 230, 80);
+        fill(60, 230, 80); //green user ship laser
         ellipse(x, y, size + 2, size + 2);
       }
       else{
-        fill(230,15,15);
+        fill(230,15,15); //red enemy laser
         ellipse(x, y, size + 3, size + 3);
       }
 
-      //figure out how to blur like kailedescope project
-
-      //filter(BLUR,3);
       //white in the center of bullet
       fill(255);
       ellipse(x, y, size - 2, size -2 );

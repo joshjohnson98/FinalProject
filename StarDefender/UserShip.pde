@@ -23,6 +23,7 @@ class UserShip {
     rot = 0;
     isAlive = true;
     lives = 3;
+    
     bullets = new Bullet[maxBullets];
     //fill with initialized bullets
     for (int i = 0; i<maxBullets; i++) {
@@ -34,19 +35,17 @@ class UserShip {
 
   void displayShip() {
     if (exploding) {
-      delay(2500); //time delay for new ship
+      delay(2500); //time delay for new ship after death
       exploding = false;
       isAlive = true;
     }
-    if (isAlive) {
+    if (isAlive) {    //normal ship image
       imageMode(CENTER);
-      //translate(width/2,height/2);
       rotate(rot);
       image(shipPic, 0, 0);
       resetMatrix();
-    } else {
+    } else {           //exploded ship image
       imageMode(CENTER);
-      //translate(width/2,height/2);
       rotate(rot);
       image(explosion, 0, 0);
       resetMatrix();
@@ -55,7 +54,7 @@ class UserShip {
     }
   }
 
-  void updateDirection() {
+  void updateDirection() { //rotate ship image and move other game objects based on last key pressed
     if (key == 'a' || keyCode == LEFT) {
       rot = 0;
       shipDirection = 0;
@@ -113,7 +112,7 @@ class UserShip {
     }
   }
   
-  void resetPosition(){
+  void resetPosition(){ //reset positions of all other game objects
        deathStar.resetPosition();
        stars.resetPosition();
        

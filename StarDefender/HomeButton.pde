@@ -12,7 +12,7 @@ class HomeButton {
     text("HOME", 750, 55);
 
     if (mouseX <= 775 && mouseX >= 725 && mouseY <= 75 && mouseY >= 25 && mousePressed) {
-      currentScreen = 1;
+      currentScreen = 1; //send to home screen
     }
   }
 }

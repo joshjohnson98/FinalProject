@@ -1,6 +1,5 @@
 class Asteroid {
   //Images of Asteroids
-  //TBD whether or not they can be destroyed by lasers
 
   PImage asteroid;
   PImage explosion;

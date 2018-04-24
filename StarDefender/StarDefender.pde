@@ -245,7 +245,7 @@ void keyPressed() {
     if (key == ' ') {
       pew.stop();
       pew.amp(1.3);
-      pew.play();
+      pew.play(); //laser sound
 
       // search empty slot
       for (int i=0; i<maxBullets; i++) {
@@ -314,7 +314,7 @@ void keyReleased() {
       gos.currentName = "";
       startTime = millis();
       currentScreen = 5;
-    } else if (gos.currentName.length() < 10 && key!= ' ') {
+    } else if (gos.currentName.length() < 10 && key!= ' ') { //set character limit at 10 and don't allow spaces
       gos.currentName += key;
       gos.currentName = gos.currentName.toUpperCase();
     }

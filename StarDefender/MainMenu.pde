@@ -10,8 +10,6 @@ class MainMenu {
   //User Input: the user clicks on buttons using their mouse
   PImage mainMenu;
 
-
-
   MainMenu() {
     mainMenu = loadImage("mainmenu.jpg");
   }
