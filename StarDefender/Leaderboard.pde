@@ -5,6 +5,9 @@ class Leaderboard{
   String [] newNames;
   String [] lives;
   String [] newLives;
+  String [] diffs;
+  String [] newDiffs;
+  
   int yPos;
   int startIndex, stopIndex; 
   long lbTime;
@@ -24,6 +27,7 @@ class Leaderboard{
   void displayLB(){
     names = loadStrings("leaderboard.txt");
     lives = loadStrings("leaderboard2.txt");
+    diffs = loadStrings("leaderboard3.txt");
     bubbleSortLives();
     imageMode(CENTER);
     image(stars, 0, 0);
@@ -31,10 +35,12 @@ class Leaderboard{
     
     fill(255, 245, 25);
     textAlign(CENTER);
-    textSize(50);
+    textSize(55);
     text("LEADERBOARD", width/2, 75);
-    textSize(40);
-    text("RANKED BY LIVES LEFT", width/2, 125);
+    textSize(25);
+    text("RANKED BY LIVES LEFT", width/2, 105);
+    textSize(20);
+    text("***won on HARD mode", width/2, 135);
     
     yPos = 200;
     
@@ -51,7 +57,13 @@ class Leaderboard{
       textAlign(LEFT);
       textSize(40);
       text(str(k+1) + ". ", width/10, yPos);
-      text(names[k], width/10 + 75, yPos);
+      
+      if (int(diffs[k]) == 1){
+        text(names[k], width/10 + 75, yPos);
+      }
+      else if (int(diffs[k]) == 2){
+        text(names[k] + "***", width/10 + 75, yPos);
+      }
       
       if (int(lives[k]) == 3){
         image(icon, 500, yPos-10);
@@ -94,10 +106,13 @@ class Leaderboard{
         if (int(lives[j]) < int(lives[j+1])){
           String tempLives = lives[j];
           String tempNames = names[j];
+          String tempDiffs = diffs[j];
           lives[j] = lives[j+1];
           names[j] = names[j+1];
+          diffs[j] = diffs[j+1];
           lives[j+1] = tempLives;
           names[j+1] = tempNames;
+          diffs[j+1] = tempDiffs;
         }
       }
     }

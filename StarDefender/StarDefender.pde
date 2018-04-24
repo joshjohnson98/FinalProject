@@ -9,7 +9,7 @@ public int numAsteroids;
 public int maxEnemies;
 public int enemySpawnTime;
 public int deathX, deathY;
-public int offX, offY; //JOSH'S TESTING
+public int offX, offY; //offset for user to spawn at bottom center of the map
 public float deadTime, respondTime;
 public boolean gameOver;
 public long startTime;
@@ -290,21 +290,25 @@ void keyReleased() {
       
       lb.newNames = new String [lb.names.length + 1];
       lb.newLives = new String [lb.lives.length + 1];
+      lb.newDiffs = new String [lb.diffs.length + 1];
 
       for (int i=0; i<lb.names.length; i++) {
         lb.newNames[i] = lb.names[i];
         lb.newLives[i] = lb.lives[i];
+        lb.newDiffs[i] = lb.diffs[i];
       }
 
       lb.newNames[lb.newNames.length - 1] = gos.currentName;
       lb.newLives[lb.newLives.length - 1] = str(falcon.lives);
+      lb.newDiffs[lb.newDiffs.length - 1] = str(difficulty);
       saveStrings(dataPath("leaderboard.txt"), lb.newNames);
       saveStrings(dataPath("leaderboard2.txt"), lb.newLives);
+      saveStrings(dataPath("leaderboard3.txt"), lb.newDiffs);
 
       gos.currentName = "";
       startTime = millis();
       currentScreen = 5;
-    } else {
+    } else if (gos.currentName.length() < 10 && key!= ' ') {
       gos.currentName += key;
       gos.currentName = gos.currentName.toUpperCase();
     }
