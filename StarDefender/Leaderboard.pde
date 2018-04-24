@@ -15,8 +15,11 @@ class Leaderboard{
   Leaderboard(){
     stars = loadImage("tallStars.jpg");
     icon = loadImage("falconIcon.png");
+    
+    //Load text files with current leaderboard into String arrays
     names = loadStrings("leaderboard.txt");
     lives = loadStrings("leaderboard2.txt");
+    diffs = loadStrings("leaderboard3.txt");
     
     yPos = 200;
     startIndex = 0;
@@ -25,6 +28,7 @@ class Leaderboard{
   }
   
   void displayLB(){
+    //Reload text files with updated leaderboard into String arrays
     names = loadStrings("leaderboard.txt");
     lives = loadStrings("leaderboard2.txt");
     diffs = loadStrings("leaderboard3.txt");
@@ -44,15 +48,18 @@ class Leaderboard{
     
     yPos = 200;
     
+    //Loop back to the first five names on the leaderboard if the last screen showed the last 5 or less names
     if (startIndex >= names.length){
       startIndex = 0;
       stopIndex = 5;
     }
     
+    //If the next group has less than 5 names, only print those names
     if (stopIndex > names.length){
       stopIndex = names.length;
     }
     
+    //Loops through the current 5 or less names printing their ranking, name, what difficulty they completed the game on, and their lives remaining
     for (int k=startIndex; k<stopIndex; k++){
       textAlign(LEFT);
       textSize(40);
@@ -77,19 +84,21 @@ class Leaderboard{
       else if (int(lives[k]) == 1){
         image(icon, 500, yPos-10);
       }
-      yPos += 75;
+      yPos += 75; // moves each line a given distance
       
       
       
     }
-    yPos = 200;
+    yPos = 200; //resets the first item in the loop to print at the top most position
     
+    //Delays the changing of names on the screen by 5 seconds
     lbTime = millis() - startTime;
     if (lbTime > names.length*1000){
       startTime = millis();
       startIndex = 0;
       stopIndex = 5;
     }
+    //switches to the next set of 5 or less names
     else if (lbTime > stopIndex*1000){
       startIndex += 5;
       stopIndex += 5;
@@ -97,6 +106,7 @@ class Leaderboard{
     
   }
   
+  //Bubble sort algorithm to sort the leaderboard arrays by number of lives left
   void bubbleSortLives(){
     int size = names.length;
     

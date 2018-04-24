@@ -98,12 +98,14 @@ void draw() {
       battleMusic.amp(0.6);
       battleMusic.loop();
       
+      //Easy difficulty
       if (difficulty == 1){
         maxEnemies = 3;
         enemySpawnTime = 4000;
         numAsteroids = 50;
         deathStar.maxHealth = 23;
       }
+      //Hard difficulty
       else if (difficulty == 2){
         maxEnemies = 5;
         enemySpawnTime = 2500;
@@ -238,7 +240,7 @@ void draw() {
 }
 
 void keyPressed() {
-
+  //If on the game screen
   if (currentScreen == 2) {
     if (key == ' ') {
       pew.stop();
@@ -277,7 +279,7 @@ void keyPressed() {
 
 //Handles the user input for their name after a successful mission
 void keyReleased() {
-
+  //If on the game over screen
   if (currentScreen == 4) {
     if (key == BACKSPACE || key == DELETE) {
       if (gos.currentName.length() >= 1) {
@@ -288,19 +290,23 @@ void keyReleased() {
       throneRoom.amp(0.7);
       throneRoom.play();
       
+      //Creates new arrays for updated leaderboard strings
       lb.newNames = new String [lb.names.length + 1];
       lb.newLives = new String [lb.lives.length + 1];
       lb.newDiffs = new String [lb.diffs.length + 1];
 
+      //Copies current leaderboard strings to bigger arrays
       for (int i=0; i<lb.names.length; i++) {
         lb.newNames[i] = lb.names[i];
         lb.newLives[i] = lb.lives[i];
         lb.newDiffs[i] = lb.diffs[i];
       }
 
+      //Updates the leaderboard strings
       lb.newNames[lb.newNames.length - 1] = gos.currentName;
       lb.newLives[lb.newLives.length - 1] = str(falcon.lives);
       lb.newDiffs[lb.newDiffs.length - 1] = str(difficulty);
+      //Saves the updated leaderboard txt files 
       saveStrings(dataPath("leaderboard.txt"), lb.newNames);
       saveStrings(dataPath("leaderboard2.txt"), lb.newLives);
       saveStrings(dataPath("leaderboard3.txt"), lb.newDiffs);
