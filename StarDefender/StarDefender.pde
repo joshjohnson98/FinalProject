@@ -99,15 +99,16 @@ void draw() {
       battleMusic.loop();
       
       if (difficulty == 1){
-        maxEnemies = 2;
+        maxEnemies = 3;
         enemySpawnTime = 4000;
         numAsteroids = 50;
+        deathStar.maxHealth = 23;
       }
       else if (difficulty == 2){
-        maxEnemies = 4;
-        enemySpawnTime = 3000;
+        maxEnemies = 6;
+        enemySpawnTime = 2000;
         numAsteroids = 75;
-        deathStar.maxHealth = 30;
+        deathStar.maxHealth = 50;
       }
       
       deathStar.resetPosition();
@@ -161,7 +162,9 @@ void draw() {
     for (int k=0; k<enemies.size(); k++) {
       enemies.get(k).updateLocation();
       enemies.get(k).checkIfHit();
-      //enemies.get(k).shootLasers();
+      if (difficulty == 2 && k==0 && enemies.get(0).isAlive){
+        enemies.get(0).shootLasers();
+      }
       
       //loop to refill enemy bullets
       if (enemies.get(k).bullets[maxBullets-1].visible == true) {
