@@ -6,12 +6,12 @@ class HomeButton {
   void displayHB() {
     textAlign(CENTER);
     fill(255, 245, 25);
-    rect(550, 50, 50, 50);
+    rect(750, 50, 50, 50);
     fill(0);
     textSize(15);
-    text("HOME", 550, 55);
+    text("HOME", 750, 55);
 
-    if (mouseX <= 575 && mouseX >= 525 && mouseY <= 75 && mouseY >= 25 && mousePressed) {
+    if (mouseX <= 775 && mouseX >= 725 && mouseY <= 75 && mouseY >= 25 && mousePressed) {
       currentScreen = 1;
     }
   }

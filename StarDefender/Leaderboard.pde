@@ -54,16 +54,16 @@ class Leaderboard{
       text(names[k], width/10 + 75, yPos);
       
       if (int(lives[k]) == 3){
-        image(icon, 400, yPos-10);
-        image(icon, 450, yPos-10);
         image(icon, 500, yPos-10);
+        image(icon, 550, yPos-10);
+        image(icon, 600, yPos-10);
       }
       else if (int(lives[k]) == 2){
-        image(icon, 400, yPos-10);
-        image(icon, 450, yPos-10);
+        image(icon, 500, yPos-10);
+        image(icon, 550, yPos-10);
       }
       else if (int(lives[k]) == 1){
-        image(icon, 400, yPos-10);
+        image(icon, 500, yPos-10);
       }
       yPos += 75;
       

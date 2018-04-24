@@ -37,10 +37,10 @@ class GameOverScreen {
 
       strokeWeight(3);
       stroke(255, 245, 25);
-      line(100, height/2 + 70, 500, height/2 + 70);
-      line(100, height/2 + 130, 500, height/2 + 130);
-      line(100, height/2 + 70, 100, height/2 + 130);
-      line(500, height/2 + 70, 500, height/2 + 130);
+      line(200, height/2 + 70, 600, height/2 + 70);
+      line(200, height/2 + 130, 600, height/2 + 130);
+      line(200, height/2 + 70, 200, height/2 + 130);
+      line(600, height/2 + 70, 600, height/2 + 130);
 
       text(currentName, width/2, height/2 + 110);
     }

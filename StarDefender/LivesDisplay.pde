@@ -10,17 +10,19 @@ class LivesDisplay{
   
   
   void displayLives(){
+    translate(0,0);
+    
     if (falcon.lives == 3){
-      image(icon, 150, 250);
-      image(icon, 200, 250);
-      image(icon, 250, 250);
+      image(icon, 650, 550);
+      image(icon, 700, 550);
+      image(icon, 750, 550);
     }
     else if (falcon.lives == 2){
-      image(icon, 200, 250);
-      image(icon, 250, 250);
+      image(icon, 700, 550);
+      image(icon, 750, 550);
     }
     else if (falcon.lives == 1){
-      image(icon, 250, 250);
+      image(icon, 750, 550);
     }
   }
 }

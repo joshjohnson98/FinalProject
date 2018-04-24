@@ -23,7 +23,7 @@ class MainMenu {
     rect(100, 500, 150, 100);
     rect(300, 500, 150, 100);
     textSize(70);
-    text("STAR DEFENDER", 300, 100);
+    text("STAR DEFENDER", width/2, 100);
 
     textSize(20);
     fill(0);

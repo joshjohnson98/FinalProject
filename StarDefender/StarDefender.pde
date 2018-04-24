@@ -26,6 +26,7 @@ DifficultyScreen ds;
 Stars stars;
 HomeButton hb;
 LivesDisplay ld;
+MiniMap mini;
 
 SoundFile mainTheme;
 SoundFile battleMusic;
@@ -34,7 +35,7 @@ SoundFile throneRoom;
 
 
 void setup() {
-  size(600, 600); //600 x 600 is a good size with me. Let's stick with this
+  size(800, 600); //600 x 600 is a good size with me. Let's stick with this
   rectMode(CENTER);
   textAlign(CENTER);
 
@@ -58,9 +59,12 @@ void setup() {
   stars = new Stars();
   hb = new HomeButton();
   falcon = new UserShip(this);
+  
   deathX = (int) (random(-0.25,0.25)*3000); //pick a random x location in the center 50% of the map
   deathY = -850;
   deathStar = new DeathStar(this, deathX, deathY); //pass in the initial x and y values of the death star
+  
+  mini = new MiniMap();
   ld = new LivesDisplay();
   asteroids = new ArrayList <Asteroid>();
   enemies = new ArrayList <Enemy>();
@@ -90,8 +94,21 @@ void draw() {
     mainTheme.stop();
 
     if (newGame) {
+      
       battleMusic.amp(0.6);
       battleMusic.loop();
+      
+      if (difficulty == 1){
+        maxEnemies = 2;
+        enemySpawnTime = 4000;
+        numAsteroids = 50;
+      }
+      else if (difficulty == 2){
+        maxEnemies = 4;
+        enemySpawnTime = 3000;
+        numAsteroids = 75;
+        deathStar.maxHealth = 30;
+      }
       
       deathStar.resetPosition();
       stars.resetPosition();
@@ -115,7 +132,7 @@ void draw() {
 
     newGame = false;
 
-    translate(width/2, height/2); //only do this here
+    translate(300, 300); //only do this here
     //^new coordinate system. center of game window is 0,0
     //all new code goes below
     stars.updateLocation();
@@ -144,7 +161,7 @@ void draw() {
     for (int k=0; k<enemies.size(); k++) {
       enemies.get(k).updateLocation();
       enemies.get(k).checkIfHit();
-      enemies.get(k).shootLasers();
+      //enemies.get(k).shootLasers();
       
       //loop to refill enemy bullets
       if (enemies.get(k).bullets[maxBullets-1].visible == true) {
@@ -186,12 +203,6 @@ void draw() {
       falcon.bullets[i].displayBullet();
     }
 
-    //Display user lives icons
-    ld.displayLives();
-
-
-
-
 
     //userShip resets matrix. leave at bottom of code here
     falcon.checkIsAlive();
@@ -203,7 +214,13 @@ void draw() {
     }
 
     translate(0, 0);
+    mini.displayMiniM();
     hb.displayHB();
+   
+    //Display user lives icons
+    ld.displayLives();
+
+ 
   } else if (currentScreen == 3) { //difficulty screen
     ds.displayDS();
     hb.displayHB();
@@ -214,9 +231,6 @@ void draw() {
     lb.displayLB();
     hb.displayHB();
 
-    //long idleTime = millis()+5000;
-    //while (idleTime>millis()) {
-    //}
   }
 }
 
