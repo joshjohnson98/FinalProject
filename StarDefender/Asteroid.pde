@@ -21,12 +21,12 @@ class Asteroid {
     boom = new SoundFile(p, "explosionSound1.mp3");
 
     tempX = int(random(-1200, 1200));
-    tempY = int(random(-1400, 1400));
+    tempY = int(random(-1400, 1400))-offY;
 
     //Keep generating random number combinations until the distance from both the userShip and deathStar are satisfied
     while ((sqrt(sq(tempX - deathStar.x) + sq(tempY - deathStar.y)) < 400) || (sqrt(sq(tempX) + sq(tempY)) < 300)) {
       tempX = int(random(-1200, 1200));
-      tempY = int(random(-1400, 1400));
+      tempY = int(random(-1400, 1400))-offY;
     }
 
     x = tempX;

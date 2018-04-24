@@ -21,7 +21,6 @@ class DeathStar {
     boom = new SoundFile(p, "deathStarBoom.mp3");
     hit = new SoundFile(p, "deathStarHit.mp3");
 
-    //initX = (int) (random(-0.25,0.25)*3000);  //random x location in the center 50% of the map
     initX = tempX;
     initY = tempY;
     x = initX;

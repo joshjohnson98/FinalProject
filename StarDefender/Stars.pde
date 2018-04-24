@@ -7,7 +7,7 @@ class Stars {
     stars = loadImage("tallStars.jpg");
     
     initX = 0;
-    initY = 0;
+    initY = 0-offY;
     x = initX;
     y = initY;
   }

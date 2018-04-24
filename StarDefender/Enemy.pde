@@ -53,7 +53,7 @@ class Enemy {
     bullets = new Bullet[maxBullets];
     //fill with initialized bullets
     for (int i = 0; i<maxBullets; i++) {
-      bullets[i] = new Bullet();
+      bullets[i] = new Bullet(true); //boolean parameter:   isEnemy = true;
       bullets[i].speedX = 0;
       bullets[i].speedY = 0;
     }

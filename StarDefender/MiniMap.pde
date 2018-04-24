@@ -11,7 +11,7 @@ class MiniMap{
     x = 700;
     y = 300;
     DSx = map(deathStar.x, -1200, 1200, 600, 800);
-    DSy = map(deathStar.y, -1400, 1400, 100, 500);
+    DSy = map(deathStar.y, -1400-offY, 1400-offY, 100, 500);
   }
   
   void displayMiniM(){

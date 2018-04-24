@@ -14,6 +14,8 @@ class DifficultyScreen {
     fill(0);
     text("EASY", 250, 210);
     text("HARD", 550, 210);
+    textSize(18);
+    text("(ENEMY LASERS!!!)", 550, 235);
 
     if (mouseX <= 350 && mouseX >= 150 && mouseY <= 250 && mouseY >= 150 && mousePressed) {
       difficulty = 1; //easy difficulty

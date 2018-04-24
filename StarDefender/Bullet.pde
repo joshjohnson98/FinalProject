@@ -1,11 +1,12 @@
 class Bullet {
   //bullets for userShip and Enemy Ships
   private int x, y, speedX, speedY, size;
-  boolean visible;
+  boolean visible, enemyBullet;
 
-  Bullet() {
+  Bullet(boolean isEnemy) {
     size = 5;
     visible = false;
+    enemyBullet = isEnemy;
   }
 
   void updateLocation() {
@@ -29,8 +30,14 @@ class Bullet {
 
   void displayBullet() {
     if (visible) {
-      fill(60, 230, 80);
-      ellipse(x, y, size + 2, size + 2);
+      if (!enemyBullet){
+        fill(60, 230, 80);
+        ellipse(x, y, size + 2, size + 2);
+      }
+      else{
+        fill(230,15,15);
+        ellipse(x, y, size + 3, size + 3);
+      }
 
       //figure out how to blur like kailedescope project
 
