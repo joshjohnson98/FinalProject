@@ -78,6 +78,7 @@ class UserShip {
         asteroids.get(i).isAlive = false;
         isAlive = false;
         lives--;
+        resetPosition();
       }
     }
 
@@ -87,15 +88,32 @@ class UserShip {
         enemies.get(j).isAlive = false;
         isAlive = false;
         lives--;
+        resetPosition();
       }
     }
     
     //collision detection performed for Death Star and handled if collision occurs
-     if (sqrt(sq(deathStar.x) + sq(deathStar.y)) <= 120) {
-       isAlive = false;
-       lives--;
-       
-       //move userShip away from DeathStar
+    if (sqrt(sq(deathStar.x) + sq(deathStar.y)) <= 120) {
+      isAlive = false;
+      lives--;
+      //move userShip away from DeathStar
+      resetPosition();
+    }
+    
+    //collision detection performed for enemy bullets and handled if collision occurs
+    for (int k=0; k<enemies.size(); k++) {
+       for (int i = 0; i<maxBullets; i++) {
+          if(enemies.get(k).bullets[i].visible && sqrt(sq(enemies.get(k).bullets[i].x)+sq(enemies.get(k).bullets[i].y)) <= 35){
+               enemies.get(k).isAlive = false;
+               isAlive = false;
+               lives--;
+               resetPosition();
+          }
+       }
+    }
+  }
+  
+  void resetPosition(){
        deathStar.resetPosition();
        stars.resetPosition();
        
@@ -104,8 +122,6 @@ class UserShip {
        }
        for (int j=0; j<asteroids.size(); j++) {
          asteroids.get(j).resetPosition();
-       }
-       
-     }
+       }    
   }
 }

@@ -14,15 +14,16 @@ class DeathStar {
   private float bulletDist, shipDist;
   private boolean isAlive;
 
-  DeathStar(PApplet p) {
+  DeathStar(PApplet p, int tempX, int tempY) {
     deathStar = loadImage("deathStar.png");
     explosion = loadImage("deathStarExplosion.png");
 
     boom = new SoundFile(p, "deathStarBoom.mp3");
     hit = new SoundFile(p, "deathStarHit.mp3");
 
-    initX = (int) (random(-0.25,0.25)*3000);  //random x location in the center 50% of the map
-    initY = -810;
+    //initX = (int) (random(-0.25,0.25)*3000);  //random x location in the center 50% of the map
+    initX = tempX;
+    initY = tempY;
     x = initX;
     y = initY;
     

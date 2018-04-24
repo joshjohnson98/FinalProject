@@ -8,6 +8,8 @@ boolean newGame;
 public int numAsteroids;
 public int maxEnemies;
 public int enemySpawnTime;
+public int deathX, deathY;
+public int initFalconX, initFalconY; //JOSH'S TESTING
 public float deadTime, respondTime;
 public boolean gameOver;
 public long startTime;
@@ -40,10 +42,12 @@ void setup() {
   currentScreen = 1;
   shipDirection = 0;
   userSpeed = 3;
-  maxBullets = 100;
-  numAsteroids = 25;        
-  maxEnemies = 2;
+  maxBullets = 20;
+  numAsteroids = 50;        
+  maxEnemies = 1;
   enemySpawnTime = 4000;
+  initFalconX = 0;
+  initFalconY = 1300;
   newGame = true;
   gameOver = false;
 
@@ -54,7 +58,9 @@ void setup() {
   stars = new Stars();
   hb = new HomeButton();
   falcon = new UserShip(this);
-  deathStar = new DeathStar(this);
+  deathX = (int) (random(-0.25,0.25)*3000); //pick a random x location in the center 50% of the map
+  deathY = -850;
+  deathStar = new DeathStar(this, deathX, deathY); //pass in the initial x and y values of the death star
   ld = new LivesDisplay();
   asteroids = new ArrayList <Asteroid>();
   enemies = new ArrayList <Enemy>();
@@ -138,6 +144,21 @@ void draw() {
     for (int k=0; k<enemies.size(); k++) {
       enemies.get(k).updateLocation();
       enemies.get(k).checkIfHit();
+      enemies.get(k).shootLasers();
+      
+      //loop to refill enemy bullets
+      if (enemies.get(k).bullets[maxBullets-1].visible == true) {
+        for (int i = 0; i<maxBullets; i++) {
+          enemies.get(k).bullets[i] = new Bullet();
+          enemies.get(k).bullets[i].speedX = 0;
+          enemies.get(k).bullets[i].speedY = 0;
+        }
+      }
+      //loop to display enemy bullets
+      for (int i = 0; i<maxBullets; i++) {
+        enemies.get(k).bullets[i].updateLocation();
+        enemies.get(k).bullets[i].displayBullet();
+      }
       enemies.get(k).displayEnemy();
 
       if (enemies.get(k).isAlive == false) {
@@ -234,6 +255,35 @@ void keyPressed() {
         }
       }
     }
+    /*
+    if (enemies.get(0).x<300 && enemies.get(0).x>-300 && enemies.get(0).y>-300 && enemies.get(0).y<300) { //if enemy ship is on screen
+      pew.stop();
+      pew.amp(0.8);
+      pew.play();
+
+      // search empty slot
+      for (int i=0; i<maxBullets; i++) {
+        if (!enemies.get(0).bullets[i].visible) {
+          // start new bullet 
+          enemies.get(0).bullets[i].visible = true;
+          enemies.get(0).bullets[i].x = enemies.get(0).x;
+          enemies.get(0).bullets[i].y = enemies.get(0).y;
+
+
+          //speedX and speedY determined by enemy ship direction at time of creation
+          //dx is x difference between enemy and user
+          //dy is y difference between enemy and user
+          //create unit vector for x and y by dividing by distance
+          //multiply each unit vector by speed of bullet for speedX and speedY
+          
+          enemies.get(0).unitX = enemies.get(0).dx/enemies.get(0).shipDist;
+          enemies.get(0).unitY = enemies.get(0).dy/enemies.get(0).shipDist;
+          enemies.get(0).bullets[i].speedX = (int) enemies.get(0).unitX*10;
+          enemies.get(0).bullets[i].speedY = (int) enemies.get(0).unitY*10;
+          break;
+        }
+      }
+    }*/
   }
 }
 
