@@ -29,7 +29,7 @@ class Bullet {
   }
 
   void displayBullet() {
-    if (visible) {
+    if (visible && falcon.isAlive) {
       if (!enemyBullet){
         fill(60, 230, 80); //green user ship laser
         ellipse(x, y, size + 2, size + 2);

@@ -13,6 +13,7 @@ class Enemy {
   PImage enemy;
   PImage explosion;
   SoundFile boom;
+  SoundFile pow;
   private float bulletDist, shipDist;
   private int x, y,spawnIndex;
   private boolean isAlive;
@@ -24,6 +25,7 @@ class Enemy {
     enemy = loadImage("enemy.png");
     explosion = loadImage("explosion.png");
     boom = new SoundFile(p, "explosionSound1.mp3");
+    pow = new SoundFile(p, "pewEnemy.mp3");
 
     isAlive = true;
 
@@ -112,9 +114,9 @@ class Enemy {
   void shootLasers(){
     
    if (x<300 && x>-300 && y>-300 && y<300 && (millis()%31 == 0)) { //if enemy ship is on screen
-      pew.stop();
-      pew.amp(0.8);
-      pew.play();
+      pow.stop();
+      pow.amp(0.8);
+      pow.play();
 
       // search empty slot
       for (int i=0; i<maxBullets; i++) {
@@ -131,8 +133,8 @@ class Enemy {
           
           unitX = -x/(sq(x)+sq(y));
           unitY = -y/(sq(x)+sq(y));
-          bullets[i].speedX = (int) (unitX*1000);
-          bullets[i].speedY = (int) (unitY*1000);
+          bullets[i].speedX = (int) (unitX*900);
+          bullets[i].speedY = (int) (unitY*900);
           println(bullets[0].speedX);
           break;
         }

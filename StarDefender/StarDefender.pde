@@ -164,22 +164,25 @@ void draw() {
     for (int k=0; k<enemies.size(); k++) {
       enemies.get(k).updateLocation();
       enemies.get(k).checkIfHit();
-      if (difficulty == 2 && k==0 && enemies.get(0).isAlive){
-        enemies.get(0).shootLasers();
-      }
       
-      //loop to refill enemy bullets
-      if (enemies.get(k).bullets[maxBullets-1].visible == true) {
-        for (int i = 0; i<maxBullets; i++) {
-          enemies.get(k).bullets[i] = new Bullet(true); //boolean parameter:   isEnemy = true;
-          enemies.get(k).bullets[i].speedX = 0;
-          enemies.get(k).bullets[i].speedY = 0;
+      //only worry about bullets for one enemy (memory issues)
+      if (difficulty == 2 && k==0 && enemies.get(0).isAlive){
+          enemies.get(0).shootLasers();
+        
+        
+        //loop to refill enemy bullets
+        if (enemies.get(0).bullets[maxBullets-1].visible == true) {
+          for (int i = 0; i<maxBullets; i++) {
+            enemies.get(0).bullets[i] = new Bullet(true); //boolean parameter:   isEnemy = true;
+            enemies.get(0).bullets[i].speedX = 0;
+            enemies.get(0).bullets[i].speedY = 0;
+          }
         }
-      }
-      //loop to display enemy bullets
-      for (int i = 0; i<maxBullets; i++) {
-        enemies.get(k).bullets[i].updateLocation();
-        enemies.get(k).bullets[i].displayBullet();
+        //loop to display enemy bullets
+        for (int i = 0; i<maxBullets; i++) {
+          enemies.get(0).bullets[i].updateLocation();
+          enemies.get(0).bullets[i].displayBullet();
+        }
       }
       enemies.get(k).displayEnemy();
 
